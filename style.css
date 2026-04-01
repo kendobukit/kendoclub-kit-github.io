@@ -1,0 +1,242 @@
+/* 共通・変数設定 */
+:root {
+    --main-navy: #0a1a33;
+    --accent-gold: #c49a6c;
+    --accent-blue: #1558a6;
+    --bg-pattern: #f4f7fb;
+    --text-main: #333;
+}
+
+body {
+    font-family: "Noto Sans JP", sans-serif;
+    margin: 0;
+    color: var(--text-main);
+    background-color: var(--bg-pattern);
+    line-height: 1.8;
+}
+
+h1, h2, h3 {
+    font-family: "Noto Serif JP", serif;
+    letter-spacing: 0.05em;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ヘッダー・ナビゲーション */
+header {
+    position: sticky;
+    top: 0;
+    background: rgba(10, 26, 51, 0.95);
+    padding: 10px 0;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo-area img {
+    height: 45px;
+}
+
+nav ul {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    position: relative;
+}
+
+nav a.current, nav a:hover {
+    color: var(--accent-gold);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background: var(--accent-gold);
+    transition: 0.3s;
+}
+
+nav a.current::after, nav a:hover::after {
+    width: 100%;
+}
+
+/* レスポンシブ用ハンバーガー */
+.nav-toggle {
+    display: none;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.nav-toggle span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: #fff;
+    transition: 0.3s;
+}
+
+.nav-toggle span:nth-child(1) {
+    top: 6px;
+}
+
+.nav-toggle span:nth-child(2) {
+    top: 14px;
+}
+
+.nav-toggle span:nth-child(3) {
+    top: 22px;
+}
+
+.nav-toggle.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* レイアウト構造 */
+section {
+    padding: 80px 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--main-navy);
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: var(--accent-gold);
+    margin-top: 15px;
+}
+
+/* アルバム・グリッド */
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.album-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.3s;
+    border-bottom: 3px solid var(--accent-gold);
+}
+
+.album-card img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+}
+
+/* カレンダー */
+.calendar-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.calendar-wrap iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* スマホ表示設定 */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--main-navy);
+        padding-top: 80px;
+        transform: translateX(100%);
+        transition: 0.4s;
+        visibility: hidden;
+    }
+
+    nav.open {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    nav a {
+        font-size: 1.2rem;
+    }
+}
